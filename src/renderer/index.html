@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self'" />
+  <title>AI Call Assistant</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header>
+    <div class="brand">
+      <span class="dot" id="statusDot" aria-hidden="true"></span>
+      <h1>AI Call Assistant</h1>
+    </div>
+    <button id="settingsBtn" class="icon-btn" type="button" title="Settings" aria-label="Settings">&#9881;</button>
+  </header>
+
+  <main id="mainView">
+    <p class="status" id="statusText" role="status" aria-live="polite">Ready — press Record (or R) while the other person is speaking</p>
+
+    <button id="recordBtn" class="record-btn" type="button" aria-pressed="false" aria-keyshortcuts="r" title="Record / stop (shortcut: R)">
+      <span class="rec-icon" aria-hidden="true"></span>
+      <span id="recordLabel">Record</span>
+    </button>
+    <p class="timer" id="timer" aria-hidden="true"></p>
+
+    <section class="panel" aria-labelledby="transcriptTitle">
+      <h2 class="panel-title" id="transcriptTitle">Question heard</h2>
+      <div class="panel-body" id="transcriptBox" tabindex="0"><span class="placeholder">The transcript of the recording will appear here.</span></div>
+    </section>
+
+    <section class="panel grow" aria-labelledby="answerTitle">
+      <h2 class="panel-title" id="answerTitle">Suggested answer</h2>
+      <div class="panel-body" id="answerBox" tabindex="0" role="log" aria-live="off"><span class="placeholder">Your AI-suggested answer will stream here.</span></div>
+    </section>
+  </main>
+
+  <div class="error" id="errorBox" role="alert" hidden>
+    <span id="errorMsg"></span>
+    <button id="errorDismiss" class="error-dismiss" type="button" aria-label="Dismiss error" title="Dismiss (Esc)">&#10005;</button>
+  </div>
+
+  <section id="settingsView" aria-label="Settings" hidden>
+    <h2>Settings</h2>
+
+    <label for="siliconflowKey">SiliconFlow API key <span class="hint">(transcription) — <a href="https://cloud.siliconflow.com/account/ak" target="_blank" rel="noreferrer">get one</a></span></label>
+    <input type="password" id="siliconflowKey" placeholder="sk-..." autocomplete="off" spellcheck="false" />
+
+    <label for="deepseekKey">DeepSeek API key <span class="hint">(answers) — <a href="https://platform.deepseek.com/api_keys" target="_blank" rel="noreferrer">get one</a></span></label>
+    <input type="password" id="deepseekKey" placeholder="sk-..." autocomplete="off" spellcheck="false" />
+
+    <label for="resume">Your resume <span class="hint">(paste as plain text)</span></label>
+    <textarea id="resume" rows="7" placeholder="Paste your resume here so answers match your background..."></textarea>
+
+    <label for="jobDescription">Job description <span class="hint">(the role you're interviewing for)</span></label>
+    <textarea id="jobDescription" rows="6" placeholder="Paste the job description here..."></textarea>
+
+    <label class="check" for="alwaysOnTop">
+      <input type="checkbox" id="alwaysOnTop" />
+      Keep window on top of the call app
+    </label>
+
+    <p class="hint">This window is always hidden from screen sharing and recordings.</p>
+
+    <div class="row">
+      <button id="saveBtn" class="primary" type="button">Save</button>
+      <button id="backBtn" type="button">Back</button>
+    </div>
+    <p class="saved" id="savedNote" role="status" hidden>Saved ✓</p>
+  </section>
+
+  <script src="audio.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

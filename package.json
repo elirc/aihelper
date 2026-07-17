@@ -1,0 +1,38 @@
+{
+  "name": "ai-call-assistant",
+  "productName": "AI Call Assistant",
+  "version": "1.0.0",
+  "description": "Records call audio on demand, transcribes it, and generates AI-suggested answers.",
+  "main": "src/main/main.js",
+  "author": "Owner",
+  "license": "MIT",
+  "scripts": {
+    "start": "electron .",
+    "test": "node --test",
+    "syntax": "node --check src/main/main.js && node --check src/main/ipc.js && node --check src/main/store.js && node --check src/main/stt.js && node --check src/main/llm.js && node --check src/main/sse.js && node --check src/main/prompt.js && node --check src/preload.js && node --check src/renderer/app.js && node --check src/renderer/audio.js",
+    "dist": "electron-builder --win"
+  },
+  "devDependencies": {
+    "electron": "^33.2.0",
+    "electron-builder": "^24.13.3"
+  },
+  "build": {
+    "appId": "com.aihelper.callassistant",
+    "productName": "AI Call Assistant",
+    "directories": {
+      "output": "dist"
+    },
+    "files": [
+      "src/**/*",
+      "package.json"
+    ],
+    "win": {
+      "target": "nsis"
+    },
+    "nsis": {
+      "oneClick": true,
+      "perMachine": false,
+      "deleteAppDataOnUninstall": false
+    }
+  }
+}
